@@ -26,7 +26,7 @@ void SpriteUpdate(float AnimationSpeed, Sprite* Sprite)
 		Sprite->Index = 0;
 }
 
-void SpriteDraw(int x, int y, float ScaleY, float ScaleX, bool FlipVert, bool FlipHorz, Sprite* Sprite, glFramebuffer* Framebuffer)
+void SpriteDraw(int x, int y, float ScaleY, float ScaleX, bool FlipVert, bool FlipHorz, Sprite* Sprite, glImage* Framebuffer)
 {
 	int Offset = Sprite->Image.Width / Sprite->AnimationLen;
 
@@ -37,5 +37,5 @@ void SpriteDraw(int x, int y, float ScaleY, float ScaleX, bool FlipVert, bool Fl
 	if (FlipVert) AddY = y - (Offset * 0.5);
 	else		  AddY = y + (Offset * 0.5);
 
-	glDrawSubTexture(AddX, AddY, Offset * ScaleX, Sprite->Image.Height * ScaleY, (int)Sprite->Index * Offset, 0, Offset, Sprite->Image.Height, &Sprite->Image, 1.0, FlipVert, FlipHorz, Framebuffer);
+	glDrawSubTexture(AddX, AddY, Offset * ScaleX, Sprite->Image.Height * ScaleY, (int)Sprite->Index * Offset, 0, Offset, Sprite->Image.Height, &Sprite->Image, FlipVert, FlipHorz, Framebuffer);
 }

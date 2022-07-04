@@ -2,6 +2,7 @@
 #define false 0
 typedef int bool;
 
+bool ForceUpdate = true;
 
 //Fps
 int Frame = 0;
@@ -35,4 +36,15 @@ float GetDeltaTime()
 	LastTime = CurrentTime;
 
 	return DeltaTime;
+}
+
+int MouseX;
+int MouseY;
+Uint32 Mouse;
+Uint8* Key;
+
+void PollEvents()
+{
+	Mouse = SDL_GetMouseState(&MouseX, &MouseY);
+	Key = SDL_GetKeyboardState(NULL);
 }

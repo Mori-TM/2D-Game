@@ -2,11 +2,11 @@
 #define TILE_COUNT 81
 glImage Tiles[TILE_COUNT];
 
-int MapX = 32;
-int MapY = 18;
-int MapSize = 576;
+int TileMapX = 32;
+int TileMapY = 18;
+int TileMapS = 576;
 
-unsigned char Map[] =
+unsigned char TileMap[] =
 {
 	255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
 	255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
@@ -28,15 +28,45 @@ unsigned char Map[] =
 	004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004, 004,
 };
 
+typedef struct
+{
+	float x;
+	float y;
+	float ScaleX;
+	float ScaleY;
+
+	int Sprite;
+} SpriteTile;
+
+#define SPRITE_MAP_MAX_SIZE 128
+int SpriteMapCount = 0;
+SpriteTile SpriteMap[SPRITE_MAP_MAX_SIZE];
+
 #define SPRITE_COUNT 13
 Sprite Sprites[SPRITE_COUNT];
 
+glImage MapFramebuffer;
+glImage MapFramebufferPrev;
+
 void MapInit()
 {
-	FILE* File = fopen("Map.txt", "rb");
+	glCreateFramebuffer(Width, Height, &MapFramebuffer);
+	glCreateFramebuffer(Width, Height, &MapFramebufferPrev);
+
+	memset(SpriteMap, 0, sizeof(SpriteTile) * SPRITE_MAP_MAX_SIZE);
+
+	FILE* File = fopen("TileMap.txt", "wb");
+	fwrite(TileMap, 1, TileMapS, File);
+	fwrite(&SpriteMapCount, sizeof(int), 1, File);
+	fwrite(SpriteMap, sizeof(SpriteTile), SPRITE_MAP_MAX_SIZE, File);
+	fclose(File);
+
+	File = fopen("TileMap.txt", "rb");
 	if (File)
 	{
-		fread(Map, 1, MapSize, File);
+		fread(TileMap, 1, TileMapS, File);
+		fread(&SpriteMapCount, sizeof(int), 1, File);
+		fread(SpriteMap, sizeof(SpriteTile), SPRITE_MAP_MAX_SIZE, File);
 		fclose(File);
 	}	
 
@@ -62,16 +92,50 @@ void MapInit()
 	}
 }
 
-void MapUpdate()
+void MapUpdateTiles(float ScaleX, float ScaleY)
 {
+	glClearFramebuffer(0, &MapFramebuffer);
+
+	for (int x = 0; x < TileMapX; x++)
+	{
+		for (int y = 0; y < TileMapY; y++)
+		{
+			unsigned char Tile = TileMap[x + y * TileMapX];
+			if (Tile < TILE_COUNT)
+				glDrawTexture((x * ScaleX), (y * ScaleY), ScaleX, ScaleY, &Tiles[Tile], false, false, &MapFramebuffer);
+		}
+	}
+
+	memcpy(MapFramebufferPrev.Data, MapFramebuffer.Data, MapFramebuffer.Size);
+}
+
+void MapUpdateSprites(float ScaleX, float ScaleY)
+{
+	glDrawBackground(&MapFramebufferPrev, &MapFramebuffer);
+
 	for (int i = 0; i < SPRITE_COUNT; i++)
 		SpriteUpdate(10.0, &Sprites[i]);
+
+	for (int i = 0; i < SpriteMapCount; i++)
+	{
+		float Scale = Sprites[SpriteMap[i].Sprite].Image.Height * ScaleY;
+
+		SpriteDraw(SpriteMap[i].x, SpriteMap[i].y, SpriteMap[i].ScaleX, SpriteMap[i].ScaleY, false, false, &Sprites[SpriteMap[i].Sprite], &MapFramebuffer);
+	}
+		
 }
 
 void MapDestroy()
 {
-	FILE* File = fopen("Map.txt", "wb");
-	fwrite(Map, 1, MapSize, File);
+//	memset(SpriteMap, 0, sizeof(SpriteTile) * SPRITE_MAP_MAX_SIZE);
+
+	glFreeImage(&MapFramebuffer);
+	glFreeImage(&MapFramebufferPrev);
+
+	FILE* File = fopen("TileMap.txt", "wb");
+	fwrite(TileMap, 1, TileMapS, File);
+	fwrite(&SpriteMapCount, sizeof(int), 1, File);
+	fwrite(SpriteMap, sizeof(SpriteTile), SPRITE_MAP_MAX_SIZE, File);
 	fclose(File);
 
 	for (int i = 0; i < 81; i++)

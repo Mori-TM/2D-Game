@@ -3,6 +3,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define GL_COLOR_32(R,G,B,A) (((unsigned int)(A)<<24) | ((unsigned int)(B)<<16) | ((unsigned int)(G)<<8) | ((unsigned int)(R)<<0))
+#define GL_COLOR_24(R,G,B,A) (((unsigned int)(255)<<24) | ((unsigned int)(B)<<16) | ((unsigned int)(G)<<8) | ((unsigned int)(R)<<0))
+#define GL_BYTE_FLOAT (1.0 / 255.0)
+
 typedef struct
 {
 	int Width;
@@ -20,9 +24,16 @@ typedef struct
 {
 	int Width;
 	int Height;
-	int ChannelCount;
+	int Size;
+	int ImageType;
 	unsigned char* Data;
 } glImage;
+
+typedef enum
+{
+	GL_IMAGE_RGB = 0x3,
+	GL_IMAGE_RGBA = 0x4,
+} glImageType;
 
 typedef enum
 {
@@ -31,14 +42,14 @@ typedef enum
 	GL_WINDOW_ASPECT_4_3 = 0x2,
 } glWindowFlags;
 
-void glCreateWindow(const char* Title, int x, int y, int Width, int Height, glWindow* Window, int Flags)
+void glCreateWindow(const char* Title, int x, int y, int Width, int Height, int WindowFlags, glWindow* Window)
 {
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
 	Window->Width = Width;
 	Window->Height = Height;
 
-	switch (Flags)
+	switch (WindowFlags)
 	{
 	case GL_WINDOW_DYNAMIC_ASPECT:
 		Window->Aspect = 0.0;
@@ -59,7 +70,7 @@ void glCreateWindow(const char* Title, int x, int y, int Width, int Height, glWi
 	Window->Window = SDL_CreateWindow(Title, x, y, Width, Height, SDL_WINDOW_RESIZABLE);
 	Window->Surface = SDL_GetWindowSurface(Window->Window);
 	Window->Renderer = SDL_CreateRenderer(Window->Window, -1, SDL_RENDERER_SOFTWARE);
-	Window->Swapchain = SDL_CreateTexture(Window->Renderer, SDL_PIXELFORMAT_RGB24, SDL_TEXTUREACCESS_STREAMING, Width, Height);
+	Window->Swapchain = SDL_CreateTexture(Window->Renderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, Width, Height);
 }
 
 void glDestroy(glWindow* Window)
@@ -103,7 +114,7 @@ int glPollEvent(glWindow* Window)
 			Rect.h = Window->Height;
 			SDL_RenderSetViewport(Window->Renderer, &Rect);
 			SDL_DestroyTexture(&Window->Swapchain);
-			Window->Swapchain = SDL_CreateTexture(Window->Renderer, SDL_PIXELFORMAT_RGB24, SDL_TEXTUREACCESS_STREAMING, Window->Width, Window->Height);
+			Window->Swapchain = SDL_CreateTexture(Window->Renderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, Window->Width, Window->Height);
 			return GL_EVENT_RESIZE;
 		}
 	}
@@ -126,33 +137,132 @@ extern inline void glSetWindowSize(glWindow* Window, int Width, int Height)
 	SDL_SetWindowSize(Window->Window, Width, Height);
 }
 
-typedef struct
+extern inline int glGetWindowFocus(glWindow* Window)
 {
-	int Width;
-	int Height;
-	int Size;
-	unsigned char* Data;
-} glFramebuffer;
+	return (SDL_GetWindowFlags(Window->Window) & SDL_WINDOW_INPUT_FOCUS);
+}
 
-void glCreateFramebuffer(int Width, int Height, glFramebuffer* Framebuffer)
+void glFreeImage(glImage* Image)
+{
+	Image->ImageType = 0;
+	Image->Width = 0;
+	Image->Height = 0;
+	free(Image->Data);
+	Image->Data = NULL;
+}
+
+void glResizeImage(glImage* Image, int NewWidth, int NewHeight)
+{
+	glImage NewImage;
+	NewImage.ImageType = Image->ImageType;
+	NewImage.Width = NewWidth;
+	NewImage.Height = NewHeight;
+	NewImage.Size = NewWidth * NewHeight * Image->ImageType;
+	NewImage.Data = malloc(NewImage.Size);
+
+	float ImageX = 0;
+	float ImageY = 0;
+
+	float ImageW = (float)Image->Width / (float)NewWidth;
+	float ImageH = (float)Image->Height / (float)NewHeight;
+
+	for (int x = 0; x < NewWidth; x++)
+	{
+		for (int y = 0; y < NewHeight; y++)
+		{
+			int Index0 = ((int)ImageX + (int)ImageY * Image->Width) * Image->ImageType;
+			int Index1 = (x + y * NewWidth) * Image->ImageType;
+
+			NewImage.Data[Index1] = Image->Data[Index0];
+			NewImage.Data[Index1 + 1] = Image->Data[Index0 + 1];
+			NewImage.Data[Index1 + 2] = Image->Data[Index0 + 2];
+			if (Image->ImageType == GL_IMAGE_RGBA)
+				NewImage.Data[Index1 + 3] = Image->Data[Index0 + 3];
+
+			ImageY += ImageH;
+		}
+
+		ImageY = 0;
+		ImageX += ImageW;
+	}
+
+	free(Image->Data);
+	*Image = NewImage;
+}
+
+void glImageRGB(glImage* Image)
+{
+	if (Image->ImageType == GL_IMAGE_RGB)
+		return;
+
+	glImage NewImage = *Image;
+	NewImage.ImageType = GL_IMAGE_RGB;
+	NewImage.Size = NewImage.Width * NewImage.Width * NewImage.ImageType;
+	NewImage.Data = malloc(NewImage.Size);
+
+	int j = 0;
+	for (int i = 0; i < Image->Size; i += 4)
+	{
+		NewImage.Data[j] = Image->Data[i];
+		NewImage.Data[j + 1] = Image->Data[i + 1];
+		NewImage.Data[j + 2] = Image->Data[i + 2];
+		j += 3;
+	}
+
+	free(Image->Data);
+	*Image = NewImage;
+}
+
+void glImageRGBA(glImage* Image)
+{
+	if (Image->ImageType == GL_IMAGE_RGBA)
+		return;
+
+	glImage NewImage = *Image;
+	NewImage.ImageType = GL_IMAGE_RGBA;
+	NewImage.Size = NewImage.Width * NewImage.Width * NewImage.ImageType;
+	NewImage.Data = malloc(NewImage.Size);
+
+	int j = 0;
+	for (int i = 0; i < Image->Size; i += 3)
+	{
+		NewImage.Data[j] = Image->Data[i];
+		NewImage.Data[j + 1] = Image->Data[i + 1];
+		NewImage.Data[j + 2] = Image->Data[i + 2];
+		NewImage.Data[j + 3] = 255;
+		j += 4;
+	}
+
+	free(Image->Data);
+	*Image = NewImage;
+}
+
+extern inline void glImageBrightness(float Brightness, glImage* Image)
+{
+	for (int i = 0; i < Image->Size; i++)
+		Image->Data[i] = ((float)Image->Data[i] * Brightness);
+}
+
+void glCreateFramebuffer(int Width, int Height, glImage* Framebuffer)
 {
 	Framebuffer->Width = Width;
 	Framebuffer->Height = Height;
-	Framebuffer->Size = Width * Height * 3;
+	Framebuffer->ImageType = GL_IMAGE_RGBA;
+	Framebuffer->Size = Width * Height * Framebuffer->ImageType;
 	Framebuffer->Data = (unsigned char*)malloc(Framebuffer->Size);
 	memset(Framebuffer->Data, 255, Framebuffer->Size);
 }
 
-void glResizeFramebuffer(int Width, int Height, glFramebuffer* Framebuffer)
+void glResizeFramebuffer(int Width, int Height, glImage* Framebuffer)
 {
 	Framebuffer->Width = Width;
 	Framebuffer->Height = Height;
-	Framebuffer->Size = Width * Height * 3;
+	Framebuffer->Size = Width * Height * Framebuffer->ImageType;
 	Framebuffer->Data = (unsigned char*)realloc(Framebuffer->Data, Framebuffer->Size);
 	memset(Framebuffer->Data, 255, Framebuffer->Size);
 }
 
-void glDrawFramebuffer(glWindow* Window, glFramebuffer* Framebuffer)
+void glDrawFramebuffer(glWindow* Window, glImage* Framebuffer)
 {
 	void* Pixels;
 	int Pitch;
@@ -166,59 +276,72 @@ void glDrawFramebuffer(glWindow* Window, glFramebuffer* Framebuffer)
 	SDL_RenderPresent(Window->Renderer);
 }
 
-void glDestroyFramebuffer(glFramebuffer* Framebuffer)
-{
-	free(Framebuffer->Data);
-}
-
-void glClearFramebuffer(int Shade, glFramebuffer* Framebuffer)
+void glClearFramebuffer(int Shade, glImage* Framebuffer)
 {
 	memset(Framebuffer->Data, Shade, Framebuffer->Size);
 }
 
-//must be rgb!!
-void glDrawBackground(glImage* Image, glFramebuffer* Framebuffer)
+//must be equal to framebuffer
+void glDrawBackground(glImage* Image, glImage* Framebuffer)
 {
 	memcpy(Framebuffer->Data, Image->Data, Framebuffer->Size);
 }
 
-extern inline void glDrawPixel(int x, int y, unsigned char r, unsigned char g, unsigned char b, glFramebuffer* Framebuffer)
+void glDrawLayer(glImage* Image, glImage* Framebuffer)
 {
-	int Index = (x + y * Framebuffer->Width) * 3;
+	for (int i = 0; i < Framebuffer->Size; i += 4)
+	{
+		if (Image->Data[i + 3] != 0)
+		{
+			Framebuffer->Data[i] = Image->Data[i];
+			Framebuffer->Data[i + 1] = Image->Data[i + 1];
+			Framebuffer->Data[i + 2] = Image->Data[i + 2];
+			Framebuffer->Data[i + 3] = Image->Data[i + 3];
+		}
+	}
+}
+
+extern inline void glDrawPixel(int x, int y, unsigned int Color, glImage* Framebuffer)
+{
+	int Index = (x + y * Framebuffer->Width) * Framebuffer->ImageType;
 	if (Index >= 0 && Index < Framebuffer->Size &&
 		x >= 0 && x < Framebuffer->Width &&
 		y >= 0 && y < Framebuffer->Height)
 	{
-		Framebuffer->Data[Index] = r;
-		Framebuffer->Data[Index + 1] = g;
-		Framebuffer->Data[Index + 2] = b;
+		if (((Color >> 24) & 0xFF) != 0)
+		{
+			Framebuffer->Data[Index] = ((Color >> 0) & 0xFF);
+			Framebuffer->Data[Index + 1] = ((Color >> 8) & 0xFF);
+			Framebuffer->Data[Index + 2] = ((Color >> 16) & 0xFF);
+			Framebuffer->Data[Index + 3] = ((Color >> 24) & 0xFF);
+		}		
 	}
 }
 
-extern inline void glDrawRect(int MinX, int MinY, int MaxX, int MaxY, unsigned char r, unsigned char g, unsigned char b, glFramebuffer* Framebuffer)
+extern inline void glDrawRect(int MinX, int MinY, int MaxX, int MaxY, unsigned int Color, glImage* Framebuffer)
 {
 	for (int x = MinX; x < MaxX; x++)
 	{
 		for (int y = MinY; y < MaxY; y++)
 		{
-			glDrawPixel(x, y, r, g, b, Framebuffer);
+			glDrawPixel(x, y, Color, Framebuffer);
 		}
 	}
 }
 
-extern inline void glDrawQuad(int PosX, int PosY, int ScaleX, int ScaleY, unsigned char r, unsigned char g, unsigned char b, glFramebuffer* Framebuffer)
+extern inline void glDrawQuad(int PosX, int PosY, int ScaleX, int ScaleY, unsigned int Color, glImage* Framebuffer)
 {
-	glDrawRect(PosX, PosY, PosX + ScaleX, PosY + ScaleY, r, g, b, Framebuffer);
+	glDrawRect(PosX, PosY, PosX + ScaleX, PosY + ScaleY, Color, Framebuffer);
 }
 
-extern inline void glDrawPoint(int Scale, int PosX, int PosY, unsigned char r, unsigned char g, unsigned char b, glFramebuffer* Framebuffer)
+extern inline void glDrawPoint(int Scale, int PosX, int PosY, unsigned int Color, glImage* Framebuffer)
 {
 	float Half = Scale * 0.5;
 
-	glDrawRect(PosX - Half, PosY - Half, PosX + Half, PosY + Half, r, g, b, Framebuffer);
+	glDrawRect(PosX - Half, PosY - Half, PosX + Half, PosY + Half, Color, Framebuffer);
 }
 
-void glDrawSubTexture(int PosX, int PosY, int ScaleX, int ScaleY, int StartX, int StartY, int EndX, int EndY, glImage* Image, float Brightness, int FlipVert, int FlipHorz, glFramebuffer* Framebuffer)
+void glDrawSubTexture(int PosX, int PosY, int ScaleX, int ScaleY, int StartX, int StartY, int EndX, int EndY, glImage* Image, int FlipVert, int FlipHorz, glImage* Framebuffer)
 {
 	float ImageX;
 	float ImageY;
@@ -256,16 +379,16 @@ void glDrawSubTexture(int PosX, int PosY, int ScaleX, int ScaleY, int StartX, in
 	{
 		for (int y = PosY; y < PosY + ScaleY; y++)
 		{
-			int Index = ((int)ImageX + (int)ImageY * Image->Width) * Image->ChannelCount;
-
-			unsigned char r = Image->Data[Index];
-			unsigned char g = Image->Data[Index + 1];
-			unsigned char b = Image->Data[Index + 2];
+			int Index = ((int)ImageX + (int)ImageY * Image->Width) * Image->ImageType;
 
 			ImageY += ImageH;
 
-			if ((Image->ChannelCount == 4 && Image->Data[Index + 3] > 0.5) || (Image->ChannelCount != 4))
-				glDrawPixel(x, y, r * Brightness, g * Brightness, b * Brightness, Framebuffer);
+		//	if ((Image->ChannelCount == 4 && Image->Data[Index + 3] > 0.5) || (Image->ChannelCount != 4))
+				
+			if (Image->ImageType == GL_IMAGE_RGB)
+				glDrawPixel(x, y, GL_COLOR_24(Image->Data[Index], Image->Data[Index + 1], Image->Data[Index + 2]), Framebuffer);
+			else
+				glDrawPixel(x, y, GL_COLOR_32(Image->Data[Index], Image->Data[Index + 1], Image->Data[Index + 2], Image->Data[Index + 3]), Framebuffer);
 		}
 
 		ImageY = ImageStartY;
@@ -274,12 +397,12 @@ void glDrawSubTexture(int PosX, int PosY, int ScaleX, int ScaleY, int StartX, in
 }
 
 
-extern inline void glDrawTexture(int PosX, int PosY, int ScaleX, int ScaleY, glImage* Image, float Brightness, int FlipVert, int FlipHorz, glFramebuffer* Framebuffer)
+extern inline void glDrawTexture(int PosX, int PosY, int ScaleX, int ScaleY, glImage* Image, int FlipVert, int FlipHorz, glImage* Framebuffer)
 {
-	glDrawSubTexture(PosX, PosY, ScaleX, ScaleY, 0, 0, Image->Width, Image->Height, Image, Brightness, FlipVert, FlipHorz, Framebuffer);
+	glDrawSubTexture(PosX, PosY, ScaleX, ScaleY, 0, 0, Image->Width, Image->Height, Image, FlipVert, FlipHorz, Framebuffer);
 }
 
-void glDrawLine(int x1, int y1, int x2, int y2, unsigned char r, unsigned char g, unsigned char b, glFramebuffer* Framebuffer)
+void glDrawLine(int x1, int y1, int x2, int y2, unsigned int Color, glImage* Framebuffer)
 {
 	int x, y, dx, dy, dx1, dy1, px, py, xe, ye, i;
 	dx = x2 - x1;
@@ -302,7 +425,7 @@ void glDrawLine(int x1, int y1, int x2, int y2, unsigned char r, unsigned char g
 			y = y2;
 			xe = x1;
 		}
-		glDrawPixel(x, y, r, g, b, Framebuffer);
+		glDrawPixel(x, y, Color, Framebuffer);
 		for (i = 0; x < xe; i++)
 		{
 			x = x + 1;
@@ -322,7 +445,7 @@ void glDrawLine(int x1, int y1, int x2, int y2, unsigned char r, unsigned char g
 				}
 				px = px + 2 * (dy1 - dx1);
 			}
-			glDrawPixel(x, y, r, g, b, Framebuffer);
+			glDrawPixel(x, y, Color, Framebuffer);
 		}
 	}
 	else
@@ -339,7 +462,7 @@ void glDrawLine(int x1, int y1, int x2, int y2, unsigned char r, unsigned char g
 			y = y2;
 			ye = y1;
 		}
-		glDrawPixel(x, y, r, g, b, Framebuffer);
+		glDrawPixel(x, y, Color, Framebuffer);
 		for (i = 0; y < ye; i++)
 		{
 			y = y + 1;
@@ -359,7 +482,7 @@ void glDrawLine(int x1, int y1, int x2, int y2, unsigned char r, unsigned char g
 				}
 				py = py + 2 * (dx1 - dy1);
 			}
-			glDrawPixel(x, y, r, g, b, Framebuffer);
+			glDrawPixel(x, y, Color, Framebuffer);
 		}
 	}
 }
@@ -461,55 +584,9 @@ glImage glLoadImage(const char* Filename, int FlipVertical)
 	glImage Image;
 	Image.Width = ImageInfo.Width;
 	Image.Height = ImageInfo.Height;
-	Image.ChannelCount = (ImageInfo.Bits == 32 ? 4 : 3);
+	Image.ImageType = (ImageInfo.Bits == 32 ? 4 : 3);
+	Image.Size = ImageSize;
 	Image.Data = ImageData;
 
 	return Image;
-}
-
-void glFreeImage(glImage* Image)
-{
-	Image->ChannelCount = 0;
-	Image->Width = 0;
-	Image->Height = 0;
-	free(Image->Data);
-	Image->Data = NULL;
-}
-
-void glResizeImage(glImage* Image, int NewWidth, int NewHeight)
-{
-	glImage NewImage;
-	NewImage.ChannelCount = Image->ChannelCount;
-	NewImage.Width = NewWidth;
-	NewImage.Height = NewHeight;
-	NewImage.Data = malloc(NewWidth * NewHeight * Image->ChannelCount);
-
-	float ImageX = 0;
-	float ImageY = 0;
-
-	float ImageW = (float)Image->Width / (float)NewWidth;
-	float ImageH = (float)Image->Height / (float)NewHeight;
-
-	for (int x = 0; x < NewWidth; x++)
-	{
-		for (int y = 0; y < NewHeight; y++)
-		{
-			int Index0 = ((int)ImageX + (int)ImageY * Image->Width) * Image->ChannelCount;
-			int Index1 = (x + y * NewWidth) * Image->ChannelCount;
-
-			NewImage.Data[Index1] = Image->Data[Index0];
-			NewImage.Data[Index1 + 1] = Image->Data[Index0 + 1];
-			NewImage.Data[Index1 + 2] = Image->Data[Index0 + 2];
-			if (Image->ChannelCount == 4)
-				NewImage.Data[Index1 + 3] = Image->Data[Index0 + 3];
-
-			ImageY += ImageH;
-		}
-
-		ImageY = 0;
-		ImageX += ImageW;
-	}
-
-	free(Image->Data);
-	*Image = NewImage;
 }
