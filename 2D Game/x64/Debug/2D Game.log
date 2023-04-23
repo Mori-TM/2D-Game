@@ -1,0 +1,21 @@
+﻿  main.c
+C:\Users\Moritz Desktop\source\repos\2D Game\2D Game\glWindow.h(51,40): warning C4047: 'function': 'SDL_Texture *' differs in levels of indirection from 'SDL_Texture **'
+C:\Users\Moritz Desktop\source\repos\2D Game\2D Game\glWindow.h(51,23): warning C4024: 'SDL_DestroyTexture': different types for formal and actual parameter 1
+C:\Users\Moritz Desktop\source\repos\2D Game\2D Game\glWindow.h(151,18): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\Moritz Desktop\source\repos\2D Game\2D Game\glWindow.h(151,31): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\Moritz Desktop\source\repos\2D Game\2D Game\glWindow.h(151,44): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\Moritz Desktop\source\repos\2D Game\2D Game\glWindow.h(151,57): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\Moritz Desktop\source\repos\2D Game\2D Game\glWindow.h(149,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Moritz Desktop\source\repos\2D Game\2D Game\glWindow.h(175,25): warning C4244: 'function': conversion from 'float' to 'unsigned char', possible loss of data
+C:\Users\Moritz Desktop\source\repos\2D Game\2D Game\glWindow.h(175,41): warning C4244: 'function': conversion from 'float' to 'unsigned char', possible loss of data
+C:\Users\Moritz Desktop\source\repos\2D Game\2D Game\glWindow.h(175,57): warning C4244: 'function': conversion from 'float' to 'unsigned char', possible loss of data
+C:\Users\Moritz Desktop\source\repos\2D Game\2D Game\glWindow.h(178,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Moritz Desktop\source\repos\2D Game\2D Game\glWindow.h(156,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Moritz Desktop\source\repos\2D Game\2D Game\glWindow.h(157,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Moritz Desktop\source\repos\2D Game\2D Game\glWindow.h(193,8): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Moritz Desktop\source\repos\2D Game\2D Game\glWindow.h(194,8): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Moritz Desktop\source\repos\2D Game\2D Game\main.c(32,15): warning C4244: '=': conversion from 'time_t' to 'int', possible loss of data
+C:\Users\Moritz Desktop\source\repos\2D Game\2D Game\main.c(49,44): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Moritz Desktop\source\repos\2D Game\2D Game\main.c(61,2): warning C4013: 'GameInit' undefined; assuming extern returning int
+main.obj : error LNK2019: unresolved external symbol GameInit referenced in function SDL_main
+C:\Users\Moritz Desktop\source\repos\2D Game\x64\Debug\2D Game.exe : fatal error LNK1120: 1 unresolved externals

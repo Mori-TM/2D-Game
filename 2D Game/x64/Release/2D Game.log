@@ -1,0 +1,137 @@
+﻿  main.c
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(517,29): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(518,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(867,30): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(870,19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(876,19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1066,23): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1122,37): warning C4305: '=': truncation from 'double' to 'float'
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1126,37): warning C4305: '=': truncation from 'double' to 'float'
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1169,36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1400,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1401,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1403,13): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1404,13): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1414,20): warning C4244: 'initializing': conversion from 'float' to 'unsigned char', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1415,20): warning C4244: 'initializing': conversion from 'float' to 'unsigned char', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1416,20): warning C4244: 'initializing': conversion from 'float' to 'unsigned char', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1424,21): warning C4244: 'initializing': conversion from 'float' to 'unsigned char', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1433,33): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1434,32): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1435,32): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1444,34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1445,34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1446,33): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1447,33): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1465,20): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1512,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1563,18): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1563,31): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1563,44): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1563,57): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1561,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1578,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1583,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1589,31): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1596,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1631,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1636,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1642,31): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1649,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1680,8): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1681,8): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1897,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1898,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1899,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1866,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(1886,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2319,57): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2319,109): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2319,161): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2254,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2379,30): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2379,50): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2379,70): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2379,90): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2380,30): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2380,50): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2380,70): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2380,90): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2381,30): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2381,50): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2381,70): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2381,90): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2386,34): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2386,54): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2387,34): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2387,54): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2388,34): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2388,54): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2451,88): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2451,125): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2613,25): warning C4018: '<': signed/unsigned mismatch
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2615,26): warning C4018: '<': signed/unsigned mismatch
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2618,12): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2618,12): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2783,50): warning C4098: 'glSaveImage': 'void' function returning a value
+J:\VS_Backups\02.07.2022\2D Game\2D Game\glWindow.h(2785,50): warning C4098: 'glSaveImage': 'void' function returning a value
+J:\VS_Backups\02.07.2022\2D Game\2D Game\main.c(15,33): warning C4305: 'initializing': truncation from 'double' to 'float'
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Helper.h(17,15): warning C4244: '=': conversion from 'time_t' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Helper.h(34,44): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Helper.h(54,27): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Helper.h(59,27): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Sprite.h(13,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Sprite.h(36,25): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Sprite.h(37,19): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Sprite.h(39,25): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Sprite.h(40,19): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Sprite.h(42,38): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Sprite.h(42,69): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Sprite.h(33,35): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Map.h(113,16): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Map.h(113,36): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Map.h(113,56): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Map.h(113,71): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Map.h(118,20): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Map.h(118,40): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Map.h(118,60): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Map.h(118,75): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Map.h(139,26): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Map.h(139,42): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Player.h(85,13): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Player.h(85,25): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\Player.h(82,45): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(57,21): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(57,31): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(57,41): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(57,51): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(61,20): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(61,26): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(61,32): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(61,38): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(24,31): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(25,32): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(110,16): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(110,19): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(110,22): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(110,36): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(111,19): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(111,22): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(111,25): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(111,39): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(115,16): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(115,19): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(115,22): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(115,36): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(116,19): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(116,22): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(116,25): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(116,39): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(69,33): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\TileEditor.h(73,34): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+J:\VS_Backups\02.07.2022\2D Game\2D Game\main.c(73,1): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Generating code
+  Previous IPDB was built with incompatible compiler, fall back to full compilation.
+  All 58 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  2D Game.vcxproj -> J:\VS_Backups\02.07.2022\2D Game\x64\Release\2D Game.exe

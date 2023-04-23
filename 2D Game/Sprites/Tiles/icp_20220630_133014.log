@@ -1,0 +1,98 @@
+Start at Thursday, June 30, 2022    13:30:14
+=========================================
+
+Registration Info : 
+Unique Info : 0828564400000005-382E3F74
+
+Windows Version:
+Win7 _x64
+Module Info:
+Company: fCoder Solutions Sp. z o.o.
+Product Name: ImageConverter Plus
+Product Version: 9.0.520.170301
+
+CPU Info:
+Mode: x32 bit
+Vendor: GenuineIntel
+Vendor ID: Intel Corporation
+Extended Processor Name: Unknown P6 family
+Procesor Clock Frequecy: 3299
+Logical processors per physical: 16
+Stepping code: 2
+MMX support: yes
+MMX+ support: no
+SSE support: yes
+SSE2 support: yes
+3DNow suppor: no
+3DNow+ suppor: no
+AI64 support: no
+Hyperthreading support: no
+L1 cache size: -1
+L2 cache size: -1
+L3 cache size: -1
+
+Monitor info:
+Color depth: 32 Bits per pixel.
+Pixel Width: 1920
+Pixel Height: 1080
+Refresh frequency: 144 Hz
+
+Internet Explorer Version: 10.0
+Build Number: 10586
+
+Printers list: 
+OneNote for Windows 10
+OneNote (Desktop)
+Microsoft XPS Document Writer
+Microsoft Print to PDF
+Fax
+
+Default printer: 
+Microsoft Print to PDF
+
+
+Profile settings:
+
+Operations:
+
+Format properties:
+    Extension: bmp
+    bits per pixel : 320
+    rows direction : bottom_top
+    quantization levels : 8
+    dithering : yes
+
+Save properties:
+    Destination path: C:\Users\Moritz Desktop\source\repos\2D Game\2D Game\Sprites\Tiles
+    convert with subfolders : yes
+    restore subfolder structure in target folder : yes
+    open target folder after conversion : yes
+    create log file in target folder : yes
+
+Target file name properties:
+    Name template: {Title}.{Type}
+    what to do, if file exists : auto_rename
+    delete source images : no
+
+Processing files...
+
+=====================================================================
+
+File 1 of 1
+
+RAM free    :    2048.0 of    2048.0 Mb
+Virtual free:    1742.2 of    2047.9 Mb
+Target free disk space :   15261.8 of  237380.9 Mb
+Temp free disk space   :   15261.8 of  237380.9 Mb
+
+Src info : D:\Download\craftpix-net-198222-free-industrial-zone-tileset-pixel-art\1 Tiles\IndustrialTile_45.png
+png, 32x32px, 8bpp, 1 page(s), 96.000000x96.000000 dpi, 1126 bytes
+Load all pages :  ok
+
+Save :  ok
+
+Dest info : C:\Users\Moritz Desktop\source\repos\2D Game\2D Game\Sprites\Tiles\IndustrialTile_45.bmp
+bmp, 32x32px, 32bpp, 1 page(s), 96.012001x96.012001 dpi, 4218 bytes
+
+Complete at Thursday, June 30, 2022    13:30:14
+=========================================
